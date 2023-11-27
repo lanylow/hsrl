@@ -7,7 +7,7 @@ Free and open-source tool for Honkai: Start Rail that allows you to execute your
 ### How to load the tool?
 I am not providing any builds of this program yet, so if you want to try it you will have to compile it yourself. Once you do that, you can use the loader from my other program, [Genshin Utility](https://github.com/lanylow/genshin-utility), to load this tool into the game.
 
-### Why is my game crashing when tryin to run a script?
+### Why is my game crashing when trying to run a script?
 You cannot run scripts while in the start screen. Make sure to be in the game world before trying to run any scripts.
 
 ### How do I open and close the menu?
