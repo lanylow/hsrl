@@ -72,6 +72,8 @@ void menu::render_menu() {
       }
     }
 
+    ImGui::Separator();
+
     ImGui::PushFont(editor_font);
     menu::text_editor.Render("LuaEditor");
     ImGui::PopFont();
