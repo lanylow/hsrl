@@ -4,6 +4,7 @@
 #include <ui/ui.hpp>
 #include <ui/menu.hpp>
 #include <ui/console.hpp>
+#include <lua/lua.hpp>
 
 #include <intrin.h>
 
@@ -63,4 +64,12 @@ int hooks::endpoints::loadbuffer(lua_State* state, const char* chunk, size_t siz
   });
 
   return hooks::loadbuffer.get_trampoline<decltype(&hooks::endpoints::loadbuffer)>()(state, chunk, size, name);
+}
+
+int hooks::endpoints::error(lua_State* state) {
+  if (lua_type(state, -1) == LUA_TSTRING)
+    if (const auto str = lua_tostring(state, -1))
+      ui::console::add(str);
+
+  return hooks::error.get_trampoline<decltype(&hooks::endpoints::error)>()(state);
 }

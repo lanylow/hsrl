@@ -31,6 +31,7 @@ namespace offsets {
 
   inline uintptr_t lua_settop = 0;
   inline uintptr_t lua_pushvalue = 0;
+  inline uintptr_t lua_type = 0;
   inline uintptr_t lua_tolstring = 0;
   inline uintptr_t lua_pushfstring = 0;
   inline uintptr_t lua_pushcclosure = 0;
@@ -39,6 +40,7 @@ namespace offsets {
   inline uintptr_t lua_setfield = 0;
   inline uintptr_t lua_pcall = 0;
   inline uintptr_t lua_dump = 0;
+  inline uintptr_t lua_error = 0;
 
   inline uintptr_t xluaL_loadbuffer = 0;
   inline uintptr_t xlua_getglobal = 0;

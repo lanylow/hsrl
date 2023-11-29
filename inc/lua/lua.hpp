@@ -4,8 +4,12 @@
 
 #define LUA_OK 0
 
+#define LUA_TSTRING 4
+
 void lua_settop(lua_State* state, int index);
 void lua_pushvalue(lua_State* state, int index);
+
+int lua_type(lua_State* state, int index);
 
 const char* lua_tolstring(lua_State* state, int index, size_t* len);
 

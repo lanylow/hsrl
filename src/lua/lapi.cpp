@@ -4,6 +4,8 @@
 DECLARE_METHOD(void, lua_settop, (lua_State* state, int index), (state, index));
 DECLARE_METHOD(void, lua_pushvalue, (lua_State* state, int index), (state, index));
 
+DECLARE_METHOD(int, lua_type, (lua_State* state, int index), (state, index));
+
 DECLARE_METHOD(const char*, lua_tolstring, (lua_State* state, int index, size_t* len), (state, index, len));
 
 DECLARE_METHOD(void, lua_pushcclosure, (lua_State* state, void* func, int nup), (state, func, nup));

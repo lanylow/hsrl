@@ -31,4 +31,5 @@ namespace hooks {
   inline hooks::hook<> resize_buffers;
   inline hooks::hook<hooks::wndproc_storage> wndproc;
   inline hooks::hook<hooks::loadbuffer_storage> loadbuffer;
+  inline hooks::hook<> error;
 }
