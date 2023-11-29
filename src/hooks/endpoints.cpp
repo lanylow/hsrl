@@ -1,7 +1,9 @@
 #include <hooks/hooks.hpp>
 #include <hooks/endpoints.hpp>
 #include <runtime.hpp>
-#include <menu.hpp>
+#include <ui/ui.hpp>
+#include <ui/menu.hpp>
+#include <ui/console.hpp>
 
 #include <intrin.h>
 
@@ -17,7 +19,7 @@ long __stdcall hooks::endpoints::present(IDXGISwapChain* swap_chain, unsigned in
     hooks::wndproc.storage.window = swap_chain_desc.OutputWindow;
     hooks::wndproc.set_trampoline(SetWindowLongPtrA(hooks::wndproc.storage.window, GWLP_WNDPROC, (long long)(hooks::endpoints::wndproc)));
 
-    menu::initialize();
+    ui::initialize();
   });
 
   utils::call_once(hooks::present.storage.render_target_flag, [&] {
@@ -27,9 +29,10 @@ long __stdcall hooks::endpoints::present(IDXGISwapChain* swap_chain, unsigned in
     back_buffer->Release();
   });
 
-  menu::begin();
-  menu::render_menu();
-  menu::end();
+  ui::begin();
+  ui::menu::render();
+  ui::console::render();
+  ui::end();
 
   return hooks::present.get_trampoline<decltype(&hooks::endpoints::present)>()(swap_chain, sync_interval, flags);
 }
@@ -45,7 +48,7 @@ long __stdcall hooks::endpoints::resize_buffers(IDXGISwapChain* swap_chain, unsi
 }
 
 long long __stdcall hooks::endpoints::wndproc(HWND hwnd, unsigned int message, unsigned long long wparam, long long lparam) {
-  if (!menu::handle_message(hwnd, message, wparam, lparam) && menu::opened)
+  if (!ui::handle_message(hwnd, message, wparam, lparam) && ui::menu::opened)
     return true;
 
   return CallWindowProcA(hooks::wndproc.get_trampoline<decltype(&hooks::endpoints::wndproc)>(), hwnd, message, wparam, lparam);
