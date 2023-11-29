@@ -3,4 +3,5 @@
 
 namespace hsrl {
   int print(lua_State* state);
+  int clear(lua_State* state);
 }

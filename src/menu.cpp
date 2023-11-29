@@ -18,7 +18,7 @@ void menu::initialize() {
   io.IniFilename = nullptr;
   io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
   io.Fonts->AddFontFromFileTTF(R"(C:\Windows\Fonts\tahoma.ttf)", 14.f);
-  editor_font = io.Fonts->AddFontFromFileTTF(R"(C:\Windows\Fonts\consola.ttf)", 16.f);
+  editor_font = io.Fonts->AddFontFromFileTTF(R"(C:\Windows\Fonts\consola.ttf)", 14.f);
 
   ImGui_ImplWin32_Init(hooks::wndproc.storage.window);
   ImGui_ImplDX11_Init(hooks::present.storage.device, hooks::present.storage.context);
@@ -72,10 +72,27 @@ void menu::render_menu() {
       }
     }
 
+    ImGui::SameLine();
+    ImGui::Checkbox("Console", &menu::console);
     ImGui::Separator();
 
     ImGui::PushFont(editor_font);
     menu::text_editor.Render("LuaEditor");
+    ImGui::PopFont();
+  }
+  ImGui::End();
+
+  if (!menu::console)
+    return;
+
+  ImGui::Begin("HSRL Console", nullptr, ImGuiWindowFlags_AlwaysVerticalScrollbar);
+  {
+    ImGui::PushFont(editor_font);
+    std::unique_lock guard{ menu::lines_mutex };
+
+    for (const auto& line : menu::lines)
+      ImGui::Text(line.data());
+
     ImGui::PopFont();
   }
   ImGui::End();

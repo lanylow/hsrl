@@ -27,6 +27,7 @@ void runtime::initialize(lua_State* state) {
 
   register_table(hsrl,
     register_member(print);
+    register_member(clear);
   );
 }
 
