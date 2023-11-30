@@ -28,6 +28,7 @@ namespace offsets {
   inline uintptr_t luaL_checklstring = 0;
   inline uintptr_t luaL_newstate = 0;
   inline uintptr_t luaL_loadstring = 0;
+  inline uintptr_t luaL_setfuncs = 0;
 
   inline uintptr_t lua_settop = 0;
   inline uintptr_t lua_pushvalue = 0;

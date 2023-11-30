@@ -10,30 +10,20 @@
 
 using namespace std::chrono_literals;
 
-#define register_table(name, members) \
-  lua_newtable(state); \
-  members \
-  xlua_setglobal(state, #name)
-
-#define register_member(name) \
-  lua_pushcfunction(state, hsrl::name); \
-  lua_setfield(state, -2, #name)
-
 void runtime::initialize(lua_State* state) {
   std::printf("Initializing the lua runtime\n");
 
   runtime::hsr_state = state;
   runtime::lua_state = luaL_newstate();
 
-  register_table(hsrl,
-    register_member(print);
-    register_member(clear);
-  );
+  hsrl::open(state);
 }
 
 void runtime::do_buffer(const std::string& compiled) {
   xluaL_loadbuffer(runtime::hsr_state, compiled.c_str(), compiled.size(), "hsrl");
-  lua_pcall(runtime::hsr_state, 0, 0, 0);
+
+  if (lua_pcall(runtime::hsr_state, 0, 0, 0) != LUA_OK)
+    lua_pop(runtime::hsr_state, 1);
 }
 
 std::optional<std::string> runtime::compile(const std::string& script) {
