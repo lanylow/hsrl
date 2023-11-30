@@ -18,9 +18,15 @@ int hsrl::clear([[maybe_unused]] lua_State* state) {
   return 0;
 }
 
+int hsrl::getreg(lua_State* state) {
+  lua_pushvalue(state, LUA_REGISTRYINDEX);
+  return 1;
+}
+
 static constexpr luaL_Reg hsrllib[] = {
   { "print", hsrl::print },
   { "clear", hsrl::clear },
+  { "getreg", hsrl::getreg },
   { nullptr, nullptr }
 };
 

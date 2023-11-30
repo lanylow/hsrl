@@ -1,7 +1,10 @@
 #pragma once
 
 #include "lstate.hpp"
+#include "luaconf.hpp"
 #include <offsets.hpp>
+
+#define LUA_REGISTRYINDEX	(-LUAI_MAXSTACK - 1000)
 
 #define LUA_OK 0
 
