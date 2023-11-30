@@ -1,5 +1,6 @@
 #include <runtime.hpp>
 #include <hsrl.hpp>
+#include <ui/console.hpp>
 #include <lua/lua.hpp>
 #include <lua/lauxlib.hpp>
 #include <lua/xlua.hpp>
@@ -28,8 +29,7 @@ void runtime::do_buffer(const std::string& compiled) {
 
 std::optional<std::string> runtime::compile(const std::string& script) {
   if (luaL_loadstring(runtime::lua_state, script.c_str()) != LUA_OK) {
-    const auto error = lua_tostring(runtime::lua_state, 1);
-    std::printf("Failed to compile a script: %s\n", error);
+    ui::console::add(std::string("Failed to compile a script: ") + lua_tostring(runtime::lua_state, 1));
     lua_pop(runtime::lua_state, 1);
     return std::nullopt;
   }
