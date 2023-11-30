@@ -22,6 +22,7 @@ DECLARE_METHOD(void, lua_pushcclosure, (lua_State* state, void* func, int nup), 
 
 DECLARE_METHOD(int, lua_getfield, (lua_State* state, int index, const char* name), (state, index, name));
 DECLARE_METHOD(void, lua_createtable, (lua_State* state, int narr, int nrec), (state, narr, nrec));
+DECLARE_METHOD(void*, lua_newuserdata, (lua_State* state, size_t size), (state, size));
 
 DECLARE_METHOD(void, lua_setfield, (lua_State* state, int index, const char* name), (state, index, name));
 

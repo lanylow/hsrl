@@ -3,10 +3,10 @@
 #include <ui/ui.hpp>
 
 void ui::console::render() {
-  std::unique_lock guard{ ui::console::lines_mutex };
-
   if (!ui::menu::opened || !ui::console::opened)
     return;
+
+  std::unique_lock guard{ ui::console::lines_mutex };
 
   ImGui::Begin("HSRL Console", nullptr, ImGuiWindowFlags_AlwaysVerticalScrollbar);
   {

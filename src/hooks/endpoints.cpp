@@ -4,6 +4,7 @@
 #include <ui/ui.hpp>
 #include <ui/menu.hpp>
 #include <ui/console.hpp>
+#include <ui/scripts.hpp>
 #include <lua/lua.hpp>
 
 #include <intrin.h>
@@ -33,6 +34,7 @@ long __stdcall hooks::endpoints::present(IDXGISwapChain* swap_chain, unsigned in
   ui::begin();
   ui::menu::render();
   ui::console::render();
+  ui::scripts::render();
   ui::end();
 
   return hooks::present.get_trampoline<decltype(&hooks::endpoints::present)>()(swap_chain, sync_interval, flags);
