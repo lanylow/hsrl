@@ -19,6 +19,7 @@ DECLARE_METHOD(const char*, lua_tolstring, (lua_State* state, int index, size_t*
 
 #define lua_pushfstring(state, fmt, ...) ((const char*(*)(lua_State* state, const char*, ...))(offsets::lua_pushfstring))(state, fmt, __VA_ARGS__)
 DECLARE_METHOD(void, lua_pushcclosure, (lua_State* state, void* func, int nup), (state, func, nup));
+DECLARE_METHOD(void, lua_pushboolean, (lua_State* state, int val), (state, val));
 
 DECLARE_METHOD(int, lua_getfield, (lua_State* state, int index, const char* name), (state, index, name));
 DECLARE_METHOD(void, lua_createtable, (lua_State* state, int narr, int nrec), (state, narr, nrec));

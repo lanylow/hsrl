@@ -9,4 +9,5 @@ namespace hooks::endpoints {
   long long __stdcall wndproc(HWND window, unsigned int message, unsigned long long wparam, long long lparam);
   int loadbuffer(lua_State* state, const char* chunk, size_t size, const char* name);
   int error(lua_State* state);
+  void update(void* __this);
 }

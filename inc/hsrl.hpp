@@ -10,7 +10,10 @@ namespace hsrl {
   namespace window {
     int _new(lua_State* state);
     int settitle(lua_State* state);
+    int button(lua_State* state);
   }
+
+  int getflag(lua_State* state);
 
   void open(lua_State* state);
 }

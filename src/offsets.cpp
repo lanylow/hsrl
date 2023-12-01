@@ -15,6 +15,7 @@ void offsets::initialize() {
   offsets::lua_tolstring = offsets::get_exported("xlua", "lua_tolstring");
   offsets::lua_pushfstring = offsets::get_exported("xlua", "lua_pushfstring");
   offsets::lua_pushcclosure = offsets::get_exported("xlua", "lua_pushcclosure");
+  offsets::lua_pushboolean = offsets::get_exported("xlua", "lua_pushboolean");
   offsets::lua_getfield = offsets::get_exported("xlua", "lua_getfield");
   offsets::lua_createtable = offsets::get_exported("xlua", "lua_createtable");
   offsets::lua_newuserdata = offsets::get_exported("xlua", "lua_newuserdata");
@@ -26,4 +27,6 @@ void offsets::initialize() {
   offsets::xluaL_loadbuffer = offsets::get_exported("xlua", "xluaL_loadbuffer");
   offsets::xlua_getglobal = offsets::get_exported("xlua", "xlua_getglobal");
   offsets::xlua_setglobal = offsets::get_exported("xlua", "xlua_setglobal");
+
+  offsets::map_update = offsets::get_offset("GameAssembly", 0x454d230);
 }

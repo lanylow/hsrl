@@ -6,6 +6,7 @@
 #include <ui/console.hpp>
 #include <ui/scripts.hpp>
 #include <lua/lua.hpp>
+#include <lua/xlua.hpp>
 
 #include <intrin.h>
 
@@ -74,4 +75,16 @@ int hooks::endpoints::error(lua_State* state) {
       ui::console::add(str);
 
   return hooks::error.get_trampoline<decltype(&hooks::endpoints::error)>()(state);
+}
+
+void hooks::endpoints::update(void* __this) {
+  hooks::update.get_trampoline<decltype(&hooks::endpoints::update)>()(__this);
+
+  xlua_getglobal(runtime::hsr_state, "hsrl");
+  lua_getfield(runtime::hsr_state, -1, "invoke_update");
+
+  if (lua_pcall(runtime::hsr_state, 0, 0, 0) != LUA_OK)
+    lua_pop(runtime::hsr_state, 1);
+
+  lua_pop(runtime::hsr_state, 1);
 }

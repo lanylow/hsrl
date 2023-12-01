@@ -39,6 +39,7 @@ namespace offsets {
   inline uintptr_t lua_tolstring = 0;
   inline uintptr_t lua_pushfstring = 0;
   inline uintptr_t lua_pushcclosure = 0;
+  inline uintptr_t lua_pushboolean = 0;
   inline uintptr_t lua_getfield = 0;
   inline uintptr_t lua_createtable = 0;
   inline uintptr_t lua_newuserdata = 0;
@@ -50,4 +51,6 @@ namespace offsets {
   inline uintptr_t xluaL_loadbuffer = 0;
   inline uintptr_t xlua_getglobal = 0;
   inline uintptr_t xlua_setglobal = 0;
+
+  inline uintptr_t map_update = 0;
 }
