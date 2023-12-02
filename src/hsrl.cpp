@@ -59,20 +59,20 @@ int hsrl::window::button(lua_State* state) {
   if (!window || !text || !flag_name)
     return 0;
 
-  const auto flag = new ui::scripts::flag_t();
-  flag->hash = utils::fnv::hash(flag_name);
-  flag->type = ui::scripts::flag_type::boolean;
+  ui::scripts::clickable_t::create(window, text, flag_name, ui::scripts::window_object_type::button);
 
-  const auto button = new ui::scripts::button_t();
-  button->text = text;
-  button->flag = flag;
+  return 0;
+}
 
-  flag->object = button;
+int hsrl::window::checkbox(lua_State* state) {
+  const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow"));
+  const auto text = luaL_checkstring(state, 2);
+  const auto flag_name = luaL_checkstring(state, 3);
 
-  std::unique_lock guard{ ui::scripts::windows_mutex };
+  if (!window || !text || !flag_name)
+    return 0;
 
-  window->objects.emplace_back(button);
-  ui::scripts::flags.emplace_back(flag);
+  ui::scripts::clickable_t::create(window, text, flag_name, ui::scripts::window_object_type::checkbox);
 
   return 0;
 }
@@ -116,6 +116,7 @@ static constexpr luaL_Reg windowlib[] = {
   { "new", hsrl::window::_new },
   { "settitle", hsrl::window::settitle },
   { "button", hsrl::window::button },
+  { "checkbox", hsrl::window::checkbox },
   { nullptr, nullptr }
 };
 

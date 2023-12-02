@@ -11,6 +11,7 @@ namespace hsrl {
     int _new(lua_State* state);
     int settitle(lua_State* state);
     int button(lua_State* state);
+    int checkbox(lua_State* state);
   }
 
   int getflag(lua_State* state);
