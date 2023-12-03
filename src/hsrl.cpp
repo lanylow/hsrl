@@ -99,6 +99,7 @@ int hsrl::window::sliderint(lua_State* state) {
   slider->type = ui::scripts::window_object_type::slider_int;
 
   flag->object = slider;
+  flag->i = (int)(min);
 
   std::unique_lock guard{ ui::scripts::windows_mutex };
 
