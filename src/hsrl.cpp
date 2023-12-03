@@ -77,6 +77,37 @@ int hsrl::window::checkbox(lua_State* state) {
   return 0;
 }
 
+int hsrl::window::sliderint(lua_State* state) {
+  const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow"));
+  const auto text = luaL_checkstring(state, 2);
+  const auto min = luaL_checkinteger(state, 3);
+  const auto max = luaL_checkinteger(state, 4);
+  const auto flag_name = luaL_checkstring(state, 5);
+
+  if (!window || !text || !flag_name)
+    return 0;
+
+  const auto flag = new ui::scripts::flag_t();
+  flag->hash = utils::fnv::hash(flag_name);
+  flag->type = ui::scripts::flag_type::integer;
+
+  const auto slider = new ui::scripts::slider_t();
+  slider->text = text;
+  slider->min = (int)(min);
+  slider->max = (int)(max);
+  slider->flag = flag;
+  slider->type = ui::scripts::window_object_type::slider_int;
+
+  flag->object = slider;
+
+  std::unique_lock guard{ ui::scripts::windows_mutex };
+
+  window->objects.emplace_back(slider);
+  ui::scripts::flags.emplace_back(flag);
+
+  return 0;
+}
+
 int hsrl::getflag(lua_State* state) {
   const auto flag_name = luaL_checkstring(state, 1);
 
@@ -98,6 +129,11 @@ int hsrl::getflag(lua_State* state) {
 
         return 1;
       }
+
+      case ui::scripts::flag_type::integer: {
+        lua_pushinteger(state, flag->i);
+        return 1;
+      }
     }
   }
 
@@ -117,6 +153,7 @@ static constexpr luaL_Reg windowlib[] = {
   { "settitle", hsrl::window::settitle },
   { "button", hsrl::window::button },
   { "checkbox", hsrl::window::checkbox },
+  { "sliderint", hsrl::window::sliderint },
   { nullptr, nullptr }
 };
 

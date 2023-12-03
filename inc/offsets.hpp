@@ -26,6 +26,7 @@ namespace offsets {
   void initialize();
 
   inline uintptr_t luaL_checklstring = 0;
+  inline uintptr_t luaL_checkinteger = 0;
   inline uintptr_t luaL_newmetatable = 0;
   inline uintptr_t luaL_setmetatable = 0;
   inline uintptr_t luaL_checkudata = 0;
@@ -37,6 +38,7 @@ namespace offsets {
   inline uintptr_t lua_pushvalue = 0;
   inline uintptr_t lua_type = 0;
   inline uintptr_t lua_tolstring = 0;
+  inline uintptr_t lua_pushinteger = 0;
   inline uintptr_t lua_pushfstring = 0;
   inline uintptr_t lua_pushcclosure = 0;
   inline uintptr_t lua_pushboolean = 0;

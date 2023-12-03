@@ -8,6 +8,7 @@ struct luaL_Reg {
 };
 
 DECLARE_METHOD(const char*, luaL_checklstring, (lua_State* state, int index, size_t* len), (state, index, len));
+DECLARE_METHOD(long long, luaL_checkinteger, (lua_State* state, int index), (state, index));
 
 DECLARE_METHOD(void, luaL_newmetatable, (lua_State* state, const char* name), (state, name));
 DECLARE_METHOD(void, luaL_setmetatable, (lua_State* state, const char* name), (state, name));

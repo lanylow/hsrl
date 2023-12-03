@@ -8,7 +8,8 @@ namespace ui::scripts {
   struct window_t;
 
   enum class flag_type : int {
-    boolean
+    boolean,
+    integer
   };
 
   struct flag_t {
@@ -18,12 +19,14 @@ namespace ui::scripts {
 
     union {
       bool b;
+      int i;
     };
   };
 
   enum class window_object_type : int {
     button,
-    checkbox
+    checkbox,
+    slider_int
   };
 
   struct window_object_t {
@@ -32,10 +35,16 @@ namespace ui::scripts {
     ui::scripts::window_object_type type;
   };
 
-  struct clickable_t final : window_object_t {
+  struct clickable_t final : ui::scripts::window_object_t {
     static ui::scripts::clickable_t* create(ui::scripts::window_t* window, const char* text, const char* flag_name, ui::scripts::window_object_type type);
 
     std::string text;
+    ui::scripts::flag_t* flag;
+  };
+
+  struct slider_t final : ui::scripts::window_object_t {
+    std::string text;
+    int min, max;
     ui::scripts::flag_t* flag;
   };
 

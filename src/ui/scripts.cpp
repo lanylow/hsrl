@@ -47,6 +47,12 @@ void ui::scripts::render() {
             ImGui::Checkbox(checkbox->text.c_str(), &checkbox->flag->b);
             break;
           }
+
+          case ui::scripts::window_object_type::slider_int: {
+            const auto slider = (ui::scripts::slider_t*)(object);
+            ImGui::SliderInt(slider->text.c_str(), &slider->flag->i, slider->min, slider->max);
+            break;
+          }
         }
       }
     }

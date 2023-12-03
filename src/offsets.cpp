@@ -2,6 +2,7 @@
 
 void offsets::initialize() {
   offsets::luaL_checklstring = offsets::get_exported("xlua", "luaL_checklstring");
+  offsets::luaL_checkinteger = offsets::get_exported("xlua", "luaL_checkinteger");
   offsets::luaL_newmetatable = offsets::get_exported("xlua", "luaL_newmetatable");
   offsets::luaL_setmetatable = offsets::get_exported("xlua", "luaL_setmetatable");
   offsets::luaL_checkudata = offsets::get_exported("xlua", "luaL_checkudata");
@@ -13,6 +14,7 @@ void offsets::initialize() {
   offsets::lua_pushvalue = offsets::get_exported("xlua", "lua_pushvalue");
   offsets::lua_type = offsets::get_exported("xlua", "lua_type");
   offsets::lua_tolstring = offsets::get_exported("xlua", "lua_tolstring");
+  offsets::lua_pushinteger = offsets::get_exported("xlua", "lua_pushinteger");
   offsets::lua_pushfstring = offsets::get_exported("xlua", "lua_pushfstring");
   offsets::lua_pushcclosure = offsets::get_exported("xlua", "lua_pushcclosure");
   offsets::lua_pushboolean = offsets::get_exported("xlua", "lua_pushboolean");
