@@ -18,7 +18,7 @@ The most common cause of this problem are third-party overlays. Make sure progra
 
 ## Screenshots
 
-![Untitled](https://github.com/lanylow/hsrl/assets/31806776/666c27c5-70ab-41fd-b25d-311d95b4a194)
+![image](https://github.com/lanylow/hsrl/assets/31806776/fefeac86-e309-4be9-816d-98c0f86fd666)
 
 ## Utilized third-party libraries
 
