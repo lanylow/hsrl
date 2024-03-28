@@ -30,5 +30,5 @@ void offsets::initialize() {
   offsets::xlua_getglobal = offsets::get_exported("xlua", "xlua_getglobal");
   offsets::xlua_setglobal = offsets::get_exported("xlua", "xlua_setglobal");
 
-  offsets::map_update = offsets::get_offset("GameAssembly", 0x1ee7b40);
+  offsets::map_update = offsets::get_offset("GameAssembly", 0x4098110);
 }

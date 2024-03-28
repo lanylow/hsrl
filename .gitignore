@@ -19,3 +19,5 @@ cmake-build-debug
 /loader/bin/release
 /out
 /loader/target
+/*.lua
+/build
