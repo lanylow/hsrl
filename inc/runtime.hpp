@@ -8,8 +8,7 @@
 namespace runtime {
   void initialize(lua_State* state);
 
-  void do_buffer(const std::string& compiled);
-  std::optional<std::string> compile(const std::string& script);
+  void do_buffer(const std::string& source);
 
   inline lua_State* lua_state;
   inline lua_State* hsr_state;

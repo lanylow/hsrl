@@ -1,6 +1,7 @@
 #pragma once
 
 #include <lua/lstate.hpp>
+#include <lua/lauxlib.hpp>
 
 namespace hsrl {
   int print(lua_State* state);
@@ -17,5 +18,6 @@ namespace hsrl {
 
   int getflag(lua_State* state);
 
+  void setfuncs(lua_State* state, const luaL_Reg* l);
   void open(lua_State* state);
 }

@@ -9,9 +9,9 @@ using namespace std::chrono_literals;
 
 void initialize() {
   utils::console::attach("HSRL - Honkai: Star Rail Lua");
-  std::printf("Waiting for GameAssembly.dll and xlua.dll\n");
+  std::printf("Waiting for GameAssembly.dll and xluau.dll\n");
 
-  while (!GetModuleHandleA("GameAssembly.dll") || !GetModuleHandleA("xlua.dll"))
+  while (!GetModuleHandleA("GameAssembly.dll") || !GetModuleHandleA("xluau.dll"))
     std::this_thread::sleep_for(10ms);
 
   offsets::initialize();

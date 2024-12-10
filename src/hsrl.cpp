@@ -29,8 +29,9 @@ int hsrl::window::_new(lua_State* state) {
   if (!title)
     return 0;
 
-  const auto window = (ui::scripts::window_t*)(lua_newuserdata(state, sizeof(ui::scripts::window_t)));
-  luaL_setmetatable(state, "HSRLWindow");
+  const auto window = (ui::scripts::window_t*)(lua_newuserdatatagged(state, sizeof(ui::scripts::window_t), 0));
+  lua_getfield(state, LUA_REGISTRYINDEX, "HSRLWindow");
+  lua_setmetatable(state, -2);
 
   new (window) ui::scripts::window_t();
   window->title = title;
@@ -158,11 +159,19 @@ static constexpr luaL_Reg windowlib[] = {
   { nullptr, nullptr }
 };
 
+void hsrl::setfuncs(lua_State* state, const luaL_Reg* l) {
+  for (; l->name != nullptr; l++) {
+    lua_pushcfunction(state, l->func);
+    lua_setfield(state, -2, l->name);
+  }
+}
+
 void hsrl::open(lua_State* state) {
-  luaL_newlib(state, hsrllib);
+  luaL_newlibtable(state, hsrllib);
+  hsrl::setfuncs(state, hsrllib);
 
   luaL_newmetatable(state, "HSRLWindow");
-  luaL_setfuncs(state, windowlib, 0);
+  hsrl::setfuncs(state, windowlib);
 
   lua_pushvalue(state, -1);
   lua_setfield(state, -2, "__index");

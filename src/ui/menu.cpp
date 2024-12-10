@@ -31,10 +31,7 @@ void ui::menu::render() {
       const auto code = ui::menu::text_editor.GetText();
 
       if (!code.empty() && code.find_first_not_of(" \t\n\v\f\r") != std::string::npos) {
-        const auto compiled = runtime::compile(code);
-
-        if (compiled.has_value())
-          runtime::do_buffer(compiled.value());
+        runtime::do_buffer(code);
       }
     }
 
