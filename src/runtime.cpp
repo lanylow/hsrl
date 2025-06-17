@@ -1,13 +1,17 @@
+#include <print>
 #include <runtime.hpp>
+
+#include <cstdio>
+#include <sstream>
+#include <chrono>
+#include <print>
+
 #include <hsrl.hpp>
 #include <hooks/hooks.hpp>
 #include <ui/console.hpp>
 #include <lua/lua.hpp>
 #include <lua/lauxlib.hpp>
 #include <lua/xlua.hpp>
-
-#include <cstdio>
-#include <sstream>
 
 using namespace std::chrono_literals;
 
@@ -26,8 +30,8 @@ end
 )";
 
 void runtime::initialize(lua_State* state) {
-  std::printf("Initializing the lua runtime\n");
-  std::printf("HSR state: %p\n", state);
+  std::println("Initializing the lua runtime");
+  std::println("HSR state: {}", (void*)state);
 
   runtime::hsr_state = state;
   runtime::lua_state = luaL_newstate();

@@ -1,15 +1,13 @@
 #pragma once
 
-#include <cstdint>
-#include <thread>
 #include <windows.h>
 
-using namespace std::chrono_literals;
+#include <chrono>
 
 namespace offsets {
   template <typename type = uintptr_t>
   type get_module(const char* name) {
-    return (type)(GetModuleHandleA(name));
+    return (type)GetModuleHandleA(name);
   }
 
   template <typename type = uintptr_t>
@@ -18,7 +16,7 @@ namespace offsets {
   }
 
   inline uintptr_t get_exported(const char* module, const char* name) {
-    return (uintptr_t)(GetProcAddress(offsets::get_module<HMODULE>(module), name));
+    return (uintptr_t)GetProcAddress(offsets::get_module<HMODULE>(module), name);
   }
 }
 

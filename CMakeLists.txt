@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.23)
 
 project(hsrl)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W3 /sdl /MP /O2")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /INCREMENTAL:NO")
 
@@ -24,4 +24,4 @@ file(GLOB_RECURSE SOURCES
 
 add_library(library SHARED ${SOURCES})
 
-target_link_libraries(library "minhook/minhook.x64")
+target_link_libraries(library "minhook/minhook.x64" "d3d11")

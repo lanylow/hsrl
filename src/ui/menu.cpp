@@ -1,15 +1,14 @@
 #include <ui/menu.hpp>
+
+#include <format>
+
+#include <imgui/imgui.h>
+#include <textedit/TextEditor.h>
+
 #include <ui/console.hpp>
 #include <ui/ui.hpp>
 #include <hooks/hooks.hpp>
 #include <runtime.hpp>
-
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_dx11.h>
-#include <imgui/imgui_impl_win32.h>
-#include <textedit/TextEditor.h>
-
-#include <format>
 
 void ui::menu::render() {
   if (!ui::menu::opened)
@@ -25,7 +24,7 @@ void ui::menu::render() {
 
   ImGui::Begin("HSRL - Honkai: Star Rail Lua", nullptr, ImGuiWindowFlags_HorizontalScrollbar);
   {
-    ImGui::SetWindowSize({ 800, 600 }, ImGuiCond_Once);
+    ImGui::SetWindowSize({800, 600}, ImGuiCond_Once);
 
     if (ImGui::Button("Run")) {
       const auto code = ui::menu::text_editor.GetText();

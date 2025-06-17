@@ -7,16 +7,16 @@
 
 namespace hooks {
   struct present_storage : hooks::hook_storage {
-    ID3D11Device* device{ nullptr };
-    ID3D11DeviceContext* context{ nullptr };
-    ID3D11RenderTargetView* render_target{ nullptr };
+    ID3D11Device* device{nullptr};
+    ID3D11DeviceContext* context{nullptr};
+    ID3D11RenderTargetView* render_target{nullptr};
 
     utils::once_flag init_flag;
     utils::once_flag render_target_flag;
   };
 
   struct wndproc_storage : hooks::hook_storage {
-    HWND window{ nullptr };
+    HWND window{nullptr};
   };
 
   struct loadbuffer_storage : hooks::hook_storage {

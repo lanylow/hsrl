@@ -7,7 +7,7 @@ namespace ui::scripts {
   struct window_object_t;
   struct window_t;
 
-  enum class flag_type : int {
+  enum class flag_type : uint8_t {
     boolean,
     integer
   };
@@ -23,7 +23,7 @@ namespace ui::scripts {
     };
   };
 
-  enum class window_object_type : int {
+  enum class window_object_type : uint8_t {
     button,
     checkbox,
     slider_int

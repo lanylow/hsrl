@@ -13,7 +13,7 @@ int hsrl::print(lua_State* state) {
   return 0;
 }
 
-int hsrl::clear([[maybe_unused]] lua_State* state) {
+int hsrl::clear(lua_State*) {
   ui::console::clear();
   return 0;
 }
@@ -29,23 +29,23 @@ int hsrl::window::_new(lua_State* state) {
   if (!title)
     return 0;
 
-  const auto window = (ui::scripts::window_t*)(lua_newuserdatatagged(state, sizeof(ui::scripts::window_t), 0));
+  const auto window = (ui::scripts::window_t*)lua_newuserdatatagged(state, sizeof(ui::scripts::window_t), 0);
   lua_getfield(state, LUA_REGISTRYINDEX, "HSRLWindow");
   lua_setmetatable(state, -2);
 
-  new (window) ui::scripts::window_t();
+  new(window) ui::scripts::window_t();
   window->title = title;
 
-  std::unique_lock guard{ ui::scripts::windows_mutex };
+  std::unique_lock guard{ui::scripts::windows_mutex};
   ui::scripts::windows.emplace_back(window);
 
   return 1;
 }
 
 int hsrl::window::settitle(lua_State* state) {
-  std::unique_lock guard{ ui::scripts::windows_mutex };
+  std::unique_lock guard{ui::scripts::windows_mutex};
 
-  if (const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow")))
+  if (const auto window = (ui::scripts::window_t*)luaL_checkudata(state, 1, "HSRLWindow"))
     if (const auto title = luaL_checkstring(state, 2))
       window->title = title;
 
@@ -53,7 +53,7 @@ int hsrl::window::settitle(lua_State* state) {
 }
 
 int hsrl::window::button(lua_State* state) {
-  const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow"));
+  const auto window = (ui::scripts::window_t*)luaL_checkudata(state, 1, "HSRLWindow");
   const auto text = luaL_checkstring(state, 2);
   const auto flag_name = luaL_checkstring(state, 3);
 
@@ -66,7 +66,7 @@ int hsrl::window::button(lua_State* state) {
 }
 
 int hsrl::window::checkbox(lua_State* state) {
-  const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow"));
+  const auto window = (ui::scripts::window_t*)luaL_checkudata(state, 1, "HSRLWindow");
   const auto text = luaL_checkstring(state, 2);
   const auto flag_name = luaL_checkstring(state, 3);
 
@@ -79,7 +79,7 @@ int hsrl::window::checkbox(lua_State* state) {
 }
 
 int hsrl::window::sliderint(lua_State* state) {
-  const auto window = (ui::scripts::window_t*)(luaL_checkudata(state, 1 , "HSRLWindow"));
+  const auto window = (ui::scripts::window_t*)luaL_checkudata(state, 1, "HSRLWindow");
   const auto text = luaL_checkstring(state, 2);
   const auto min = luaL_checkinteger(state, 3);
   const auto max = luaL_checkinteger(state, 4);
@@ -102,7 +102,7 @@ int hsrl::window::sliderint(lua_State* state) {
   flag->object = slider;
   flag->i = (int)(min);
 
-  std::unique_lock guard{ ui::scripts::windows_mutex };
+  std::unique_lock guard{ui::scripts::windows_mutex};
 
   window->objects.emplace_back(slider);
   ui::scripts::flags.emplace_back(flag);
@@ -123,19 +123,19 @@ int hsrl::getflag(lua_State* state) {
       continue;
 
     switch (flag->type) {
-      case ui::scripts::flag_type::boolean: {
-        lua_pushboolean(state, flag->b);
+    case ui::scripts::flag_type::boolean: {
+      lua_pushboolean(state, flag->b);
 
-        if (flag->object->type == ui::scripts::window_object_type::button)
-          flag->b = false;
+      if (flag->object->type == ui::scripts::window_object_type::button)
+        flag->b = false;
 
-        return 1;
-      }
+      return 1;
+    }
 
-      case ui::scripts::flag_type::integer: {
-        lua_pushinteger(state, flag->i);
-        return 1;
-      }
+    case ui::scripts::flag_type::integer: {
+      lua_pushinteger(state, flag->i);
+      return 1;
+    }
     }
   }
 
@@ -143,20 +143,20 @@ int hsrl::getflag(lua_State* state) {
 }
 
 static constexpr luaL_Reg hsrllib[] = {
-  { "print", hsrl::print },
-  { "clear", hsrl::clear },
-  { "getreg", hsrl::getreg },
-  { "getflag", hsrl::getflag },
-  { nullptr, nullptr }
+  {"print", hsrl::print},
+  {"clear", hsrl::clear},
+  {"getreg", hsrl::getreg},
+  {"getflag", hsrl::getflag},
+  {nullptr, nullptr}
 };
 
 static constexpr luaL_Reg windowlib[] = {
-  { "new", hsrl::window::_new },
-  { "settitle", hsrl::window::settitle },
-  { "button", hsrl::window::button },
-  { "checkbox", hsrl::window::checkbox },
-  { "sliderint", hsrl::window::sliderint },
-  { nullptr, nullptr }
+  {"new", hsrl::window::_new},
+  {"settitle", hsrl::window::settitle},
+  {"button", hsrl::window::button},
+  {"checkbox", hsrl::window::checkbox},
+  {"sliderint", hsrl::window::sliderint},
+  {nullptr, nullptr}
 };
 
 void hsrl::setfuncs(lua_State* state, const luaL_Reg* l) {
